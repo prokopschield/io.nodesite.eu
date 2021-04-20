@@ -1,0 +1,20 @@
+{
+	"name": "io.nodesite.eu",
+	"description": "nodesite.eu socket.io-like communication",
+	"version": "1.0.5",
+	"main": "io.nodesite.eu.src.js",
+	"author": "Prokop Schield",
+	"license": "GPL-3.0-or-later",
+	"scripts": {
+		"build": "node lib/build"
+	},
+	"dependencies": {
+		"socket.io-client": "^4.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.14"
+	},
+	"keywords": [
+		"nodesite.eu"
+	]
+}
