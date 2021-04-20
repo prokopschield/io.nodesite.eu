@@ -5,6 +5,7 @@ export interface NodeSiteIOSocket extends Socket {
     write: (ev: string, ...args: any[]) => NodeSiteIOSocket;
 }
 export declare const socket: NodeSiteIOSocket;
+export declare function init(site: string): NodeSiteIOSocket;
 export default socket;
 export declare function on(event: string, cb: (...args: any[]) => void): NodeSiteIOSocket;
 export declare function once(event: string, cb: (...args: any[]) => void): NodeSiteIOSocket;

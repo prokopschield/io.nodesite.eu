@@ -1,5 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
+const port = (20122).toString();
+
 export interface NodeSiteIOSocket extends Socket {
 	nsid: number;
 	sio: (ev: string, ...args: any[]) => NodeSiteIOSocket;
@@ -9,13 +11,21 @@ export interface NodeSiteIOSocket extends Socket {
 export const socket: NodeSiteIOSocket = io('wss://' + (
 	(typeof location !== 'undefined')
 	? location.host
-	: 'io.nodesite.eu:20122'
+	: `io.nodesite.eu:${port}`
 )) as any;
 
 socket.sio = socket.emit;
 socket.on('ConnectionSuccess', (nsid: number) => socket.nsid = nsid);
 socket.emit = (e: string, ...args: any[]) => socket.sio('ctos', socket.nsid, e, args);
-socket.sio('IOreg', location.host);
+
+export function init (site: string): NodeSiteIOSocket {
+	socket.sio('IOreg', site.includes(port) ? site : `${site}:${port}`);
+	return socket;
+}
+
+if (typeof location !== 'undefined') {
+	socket.sio('IOreg', location.host);
+}
 
 socket.write = (e: string, ...args: any[]) => {
 	socket.once('stoc-ping', () => {
@@ -39,6 +49,8 @@ Object.assign(socket, {
 	default: socket,
 	socket,
 	always: socket.onAny,
+	IOreg: init,
+	init,
 });
 
 export function on (event: string, cb: (...args: any[]) => void): NodeSiteIOSocket {
