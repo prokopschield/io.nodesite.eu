@@ -19,12 +19,12 @@ socket.on('ConnectionSuccess', (nsid: number) => socket.nsid = nsid);
 socket.emit = (e: string, ...args: any[]) => socket.sio('ctos', socket.nsid, e, args);
 
 export function init (site: string): NodeSiteIOSocket {
-	socket.sio('IOreg', site.includes(port) ? site : `${site}:${port}`);
+	socket.sio('IOreg', site.split(':').shift());
 	return socket;
 }
 
 if (typeof location !== 'undefined') {
-	socket.sio('IOreg', location.host);
+	init(location.host);
 }
 
 socket.write = (e: string, ...args: any[]) => {
