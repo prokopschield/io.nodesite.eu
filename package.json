@@ -16,5 +16,16 @@
 	},
 	"keywords": [
 		"nodesite.eu"
-	]
+	],
+	"directories": {
+		"lib": "lib"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/prokopschield/io.nodesite.eu.git"
+	},
+	"bugs": {
+		"url": "https://github.com/prokopschield/io.nodesite.eu/issues"
+	},
+	"homepage": "https://github.com/prokopschield/io.nodesite.eu#readme"
 }
