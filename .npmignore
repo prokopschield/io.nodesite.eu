@@ -1,5 +1,8 @@
-package-lock.json
-yarn.lock
-node_modules
 .gitignore
+node_modules
+node_modules/
 .npmignore
+package-lock.json
+src/
+tsconfig.json
+yarn.lock
