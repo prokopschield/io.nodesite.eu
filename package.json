@@ -1,7 +1,7 @@
 {
 	"name": "io.nodesite.eu",
 	"description": "nodesite.eu socket.io-like communication",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"main": "lib/index",
 	"author": "Prokop Schield",
 	"license": "GPL-3.0-or-later",
