@@ -8,17 +8,17 @@ export interface NodeSiteIOSocket extends Socket {
 	write: (ev: string, ...args: any[]) => NodeSiteIOSocket;
 }
 
-export const socket: NodeSiteIOSocket = io('wss://' + (
-	(typeof location !== 'undefined')
-	? location.host
-	: `io.nodesite.eu:${port}`
-)) as any;
+export const socket: NodeSiteIOSocket = io(
+	'wss://' +
+		(typeof location !== 'undefined' ? location.host : `io.nodesite.eu:${port}`)
+) as any;
 
 socket.sio = socket.emit;
-socket.on('ConnectionSuccess', (nsid: number) => socket.nsid = nsid);
-socket.emit = (e: string, ...args: any[]) => socket.sio('ctos', socket.nsid, e, args);
+socket.on('ConnectionSuccess', (nsid: number) => (socket.nsid = nsid));
+socket.emit = (e: string, ...args: any[]) =>
+	socket.sio('ctos', socket.nsid, e, args);
 
-export function init (site: string): NodeSiteIOSocket {
+export function init(site: string): NodeSiteIOSocket {
 	socket.sio('IOreg', site.split(':').shift());
 	return socket;
 }
@@ -33,7 +33,7 @@ socket.write = (e: string, ...args: any[]) => {
 	});
 	socket.sio('ctos-ping', socket.nsid);
 	return socket;
-}
+};
 
 if (typeof window === 'object') {
 	Object.assign(window, {
@@ -53,22 +53,28 @@ Object.assign(socket, {
 	init,
 });
 
-export function on (event: string, cb: (...args: any[]) => void): NodeSiteIOSocket {
+export function on(
+	event: string,
+	cb: (...args: any[]) => void
+): NodeSiteIOSocket {
 	socket.on(event, cb);
 	return socket;
 }
 
-export function once (event: string, cb: (...args: any[]) => void): NodeSiteIOSocket {
+export function once(
+	event: string,
+	cb: (...args: any[]) => void
+): NodeSiteIOSocket {
 	socket.once(event, cb);
 	return socket;
 }
 
-export function always (cb: (...args: any[]) => void): NodeSiteIOSocket {
+export function always(cb: (...args: any[]) => void): NodeSiteIOSocket {
 	socket.onAny(cb);
 	return socket;
 }
 
-export function onAny (cb: (...args: any[]) => void): NodeSiteIOSocket {
+export function onAny(cb: (...args: any[]) => void): NodeSiteIOSocket {
 	socket.onAny(cb);
 	return socket;
 }
