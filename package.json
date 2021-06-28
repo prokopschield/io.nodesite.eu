@@ -12,7 +12,8 @@
 		"socket.io-client": "^4.0.1"
 	},
 	"devDependencies": {
-		"@types/node": "^14.14.14"
+		"@types/node": "^14.14.14",
+		"nsmt-nslibmgr": "^0.2.0-6"
 	},
 	"keywords": [
 		"nodesite.eu"
